@@ -24,7 +24,7 @@ function App() {
 
   const [numberOfPlayersInGroup, setNumberOfPlayersInGroup] = useState(4)
   const [playersInGroup, setPlayerInGroup] = useState(["chris", "dave", "john", "bob"])
-  const [forceRerender, SetForceRerender] = useState(false)
+  const [thing, setThing] = useState(0)
   const [players, setPlayers] = useState({
       chris: { 
         group: 1, 
@@ -157,51 +157,118 @@ function App() {
   // {player: NAME, group: 2, GroupScore: 23}
 
   const makeGroupTable = () => {
+    // const numberOfPlayers = playersInGroup.length
+    // playersInGroup.unshift("")
+      // const woof = players.chris
+      // console.log(woof.x);
+      // console.log(players.woof.x);
 
     const headerRow = playersInGroup.map((player) =>{
       return <div className="group-box">{player}</div>
     })
 
+
     const mainTable = playersInGroup.map((player , index) => {
 
-      const scoresArea = []
+      // const playerScore = []
+      // const updateScore = () => {
 
-      const eachPlayersScoresRow = () => {
+      // }
+
+
+      console.log("PLAYERSSSSS", players);
+      const scoresArea = []
+      let playerScores = []
+      // let playerScore = 0
+
+      // console.log(players[0].groupScore);
+      // let playerScores = players.groupScore
+      // let playerScores = players.player.groupScore
+
+
+      const createScoresArea = () => {
         for ( let i = 0 ; i < playersInGroup.length ; i ++) {
 
+          // const formatPlayersScores = players
+          // formatPlayersScores[player].groupScores[i] = 0
+          // setPlayers(formatPlayersScores)
+          // const editablePlayers = players
+          // editablePlayers[player].groupScores[i] = 0
+
+          // playerScores[i] = 0
+          // console.log(i);
           if( index === i) {
             scoresArea.push(<div className="group-box"><p className="group-input">X</p></div>)
+          // } else if (i === playersInGroup.length) {
+          //   scoresArea.push(<div className="group-box"><p className="group-input">{players[0].groupScore}</p></div>)
           } else {
-            scoresArea.push(<div className="group-box"><input className="group-input" type="number" onChange={(e) => handleScoreChange(e)}></input></div>)
-          }
+            scoresArea.push(<div className="group-box"><input className="group-input" type="number" onChange={(e) => {
+              // playerScores += parseInt(e.target.value)
+              // let thisPlayer = players.player
+              // thisPlayer.groupScore = playerScores
+              // setPlayers(thisPlayer)
 
-          const handleScoreChange = (score) => {
-            const editablePlayers = players
-            let inputValue = score.target.value
-            if (inputValue === ""){
-              inputValue = 0
-            }
-            if (i > index) {
-              editablePlayers[player].groupScores[i - 1] = parseInt(inputValue)
-            } else {
-              editablePlayers[player].groupScores[i] = parseInt(inputValue)
-            }
-            setPlayers(editablePlayers)
-            SetForceRerender(!forceRerender)
+              // works with OBJECTS! -- this kinda worked!!!!!!!
+              // playerScore += parseInt(e.target.value)
+              // line below needs to target each player!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+              // let thisPlayer = players[player]
+              // const editablePlayers = players
+              // editablePlayers[player].groupScore += playerScore
+              // console.log("THIS PLAYER", thisPlayer);
+              // thisPlayer.groupScore = playerScore
+              // setPlayers(editablePlayers)
+
+              // playerScores[i] += parseInt(e.target.value)
+              // players[i].groupScore += parseInt(e.target.value)
+
+
+              const editablePlayers = players
+              // if (i > index) {
+              //   editablePlayers[player].groupScores.splice(i - 1, 1, parseInt(e.target.value))
+              // } else {
+              //   editablePlayers[player].groupScores.splice(i, 1, parseInt(e.target.value))
+              // }
+              let inputValue = e.target.value
+              if (inputValue === ""){
+                inputValue = 0
+              }
+              if (i > index) {
+                editablePlayers[player].groupScores[i - 1] = parseInt(inputValue)
+              } else {
+                editablePlayers[player].groupScores[i] = parseInt(inputValue)
+              }
+              setPlayers(editablePlayers)
+
+              // const thisPlayer = players[player]
+
+              // playerScores.splice(i, 1, e.target.value)
+
+
+              let newThing = thing + 1
+              setThing(newThing)
+              console.log("playerScores", playerScores);
+              console.log("players2", players);
+            }}></input></div>)
           }
         }
-
+        // scoresArea.push(<div className="group-box"><p className="group-input">{players.player.groupScore}</p></div>)
         const reducer = (accumulator, currentValue) => accumulator + currentValue
         const totalScore = players[player].groupScores.reduce(reducer, 0)
+        console.log("TOTALSCORES", totalScore);
         scoresArea.push(<div className="group-box"><p className="group-input">{totalScore}</p></div>)
 
+        // console.log(playerScores);
         return scoresArea
       }
 
       return (
         <div className="group-row">
           <div className="group-box">{player}</div>
-          {eachPlayersScoresRow()}
+          {createScoresArea()}
+          {/* <div className="group-box"><input className="group-input" type="text"></input></div>
+          <div className="group-box"><input className="group-input"></input></div>
+          <div className="group-box"><input className="group-input"></input></div>
+          <div className="group-box"><input className="group-input"></input></div> */}
         </div>
       )
     })
@@ -219,8 +286,6 @@ function App() {
       </div>
     )
   }
-
-  
 
   return (
     <div className="App">

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import StartComp from './components/StartComp'
 
 
 function App() {
@@ -23,9 +24,9 @@ function App() {
     // for each array2 (each group of players) do group logic => loop through groups
 
   const [numberOfPlayersInGroup, setNumberOfPlayersInGroup] = useState(4)
-  const [playersInGroup, setPlayerInGroup] = useState(["chris", "dave", "john", "bob"])
+  const [playersInGroup, setPlayersInGroup] = useState(["chris", "dave", "john", "bob"])
   const [forceRerender, SetForceRerender] = useState(false)
-  const [players, setPlayers] = useState({
+  const [playersObject, setPlayersObject] = useState({
       chris: { 
         group: 1, 
         groupScores: [],
@@ -47,9 +48,9 @@ function App() {
 
 
   // creating random groups
-  const [groupPlayers, setGroupPlayers] = useState(["bob", "john", "jeff", "steve", "alex", "cat", "dog", "woof", "jim", "frog", "thing", "dood", "meh"])
+  const [groupPlayers, setGroupPlayers] = useState(["bob", "john", "jeff", "steve", "alex", "kate", "chris", "roy", "jim", "fred", "susan", "jack", "darren"])
   const [numberOfGroupsToCreate, setNumberOfGroupsToCreate] = useState(4)
-  const [numberInEachGroup, setNumberInEachGroup] = useState([3, 4, 3, 3])
+  const [numberInEachGroup, setNumberInEachGroup] = useState([3, 3, 3, 4])
 
     const randomGroups = () => {
       const groups = []
@@ -100,7 +101,7 @@ function App() {
     //     groupScore: 0,
     //   }
     // ])
-    console.log("players", players);
+    // console.log("players", players);
   }, [])
 
   const makeGroupTable = () => {
@@ -123,23 +124,23 @@ function App() {
           }
 
           const handleScoreChange = (score) => {
-            const editablePlayers = players
+            const editablePlayersObject = playersObject
             let inputValue = score.target.value
             if (inputValue === ""){
               inputValue = 0
             }
             if (i > index) {
-              editablePlayers[player].groupScores[i - 1] = parseInt(inputValue)
+              editablePlayersObject[player].groupScores[i - 1] = parseInt(inputValue)
             } else {
-              editablePlayers[player].groupScores[i] = parseInt(inputValue)
+              editablePlayersObject[player].groupScores[i] = parseInt(inputValue)
             }
-            setPlayers(editablePlayers)
+            setPlayersObject(editablePlayersObject)
             SetForceRerender(!forceRerender)
           }
         }
 
         const reducer = (accumulator, currentValue) => accumulator + currentValue
-        const totalScore = players[player].groupScores.reduce(reducer, 0)
+        const totalScore = playersObject[player].groupScores.reduce(reducer, 0)
         scoresArea.push(<div className="group-box"><p className="group-input">{totalScore}</p></div>)
 
         return scoresArea
@@ -176,6 +177,9 @@ function App() {
       </header>
 
       <p>body here</p>
+
+      <StartComp />
+
 
       <div className="group-container">
         {makeGroupTable()}

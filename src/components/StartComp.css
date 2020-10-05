@@ -1,0 +1,37 @@
+.register-player-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-player-form {
+    margin: 10px
+}
+
+/* .register-player-input {
+    padding: 5px;
+
+} */
+
+input {
+    padding: 5px;
+    margin: 5px;
+}
+
+.add-player-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.add-player-names {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.add-player-text {
+    padding: 0px 10px
+}
+
+

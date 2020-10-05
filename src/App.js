@@ -49,21 +49,11 @@ function App() {
   // creating random groups
   const [groupPlayers, setGroupPlayers] = useState(["bob", "john", "jeff", "steve", "alex", "cat", "dog", "woof", "jim", "frog", "thing", "dood", "meh"])
   const [numberOfGroupsToCreate, setNumberOfGroupsToCreate] = useState(4)
-  const [numberInEachGroup, setNumberInEachGroup] = useState([3, 3, 3, 4])
-
-
-  // const getRandomGroup = () => {
-  //       const randomGroup = Math.floor(Math.random() * numberOfGroupsToCreate)
-  //       return randomGroup
-  // }
+  const [numberInEachGroup, setNumberInEachGroup] = useState([3, 4, 3, 3])
 
     const randomGroups = () => {
       const groups = []
       const placedPlayers = []
-
-      // groupPlayers.forEach((player) => {
-        
-      // })
 
       for (let i = 0 ; i < numberOfGroupsToCreate ; i++){
           groups.push([])
@@ -75,50 +65,9 @@ function App() {
               groups[i].push(randomPlayer)
             }
           }
+          console.log("groups", groups);
       }
-
-      // numberInEachGroup.forEach((group) => {
-      //   const randomPlayer = Math.floor(Math.random() * groupPlayers)
-      //   while ()
-
-      // })
-
-
-      // while (randomCountries.length < 4 ) {
-      //   const randomIndex = Math.floor(Math.random() * (this.mapDataArray.length));
-      //   const randomCountry = this.mapDataArray[randomIndex]
-      //   if (randomCountry.area >= 200000 && randomCountries.includes(randomCountry) === false && randomCountry.name !== "Antarctica") {
-      //     randomCountries.push(randomCountry)
-      //   }
-      // }
-
-
-
-
-      // for (let i = 0 ; i < numberOfGroupsToCreate ; i++){
-      //   groups.push([])
-      // }
-
-      // // loop through groupPlayers and push each into random group IF that group has less than max
-      // groupPlayers.forEach(player => {
-
-
-
-      //   const randomGroup = Math.floor(Math.random() * numberOfGroupsToCreate)
-      //   if (groups[randomGroup].length )
-      // })
-
-
     }
-
-
-
-
-
-
-
-
-
 
 
   useEffect(() => {
@@ -153,8 +102,6 @@ function App() {
     // ])
     console.log("players", players);
   }, [])
-
-  // {player: NAME, group: 2, GroupScore: 23}
 
   const makeGroupTable = () => {
 
@@ -232,7 +179,7 @@ function App() {
 
       <div className="group-container">
         {makeGroupTable()}
-        {/* <input onChange={() => console.log("in change", players.chris.groupScore)}></input> */}
+        {randomGroups()}
       </div>
 
     </div>
